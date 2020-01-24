@@ -28,19 +28,20 @@ function writePassword() {
 
 }
 
-// Assign array for each character type
+// Assign an array for each character type.
 const lower = 'abcdefghijklmnopqrstuvwxyz'.split('')
 const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const numeric = '1234567890'.split('');
 const special = [" ", "!", "#", "$", "%", "&", "\'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~", "\""];
 
 function generatePassword() {
-  // prompt for number of characters (8-128)
+  // prompt for number of characters (8-128).
   let numOfChar;
   while (isNaN(numOfChar) || numOfChar < 8 || numOfChar > 128) {
     numOfChar = prompt("Enter a number between 8 and 128");
   }
-  // confirm lower case
+
+  // Find out what types of characters are to be included in the password.
   let useLower = null;
   let useUpper = null;
   let useNumeric = null;
@@ -48,19 +49,19 @@ function generatePassword() {
   while (!useLower && !useUpper && !useNumeric && !useSpecial) {
     //confirm lower case
     useLower = confirm("Do you want to include lower case letters?");
-    // confrim upper case
+    // confirm upper case
     useUpper = confirm("Do you want to include upper case letters?");
     // confirm numbers
     useNumeric = confirm("Do you want to include numbers?");
     // confirm special characters
     useSpecial = confirm("Do you want to include special characters?");
   };
+
   //concatenate the character arrays the user wants to include.
   let array1 = [];
   let array2 = [];
   let array3 = [];
   let combArr = [];
-
   if (useLower) {
     array1 = lower;
   }
@@ -80,12 +81,13 @@ function generatePassword() {
     combArr = array3;
   }
 
-  //Create a function to return a random element from an array of characters
+  //Create a function to return a random element from an array of characters.
   function randomElement(arr) {
     let RandChar = arr[Math.floor(Math.random() * arr.length)];
     return RandChar;
   }
 
+  // Now return a password of random characters from the combined array with the number of characters specified by the user.
   let psswrd = "";
   for (let i = 0; i < numOfChar; i++) {
     psswrd += randomElement(combArr);
